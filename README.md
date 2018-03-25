@@ -1,2 +1,6 @@
-# docs
-Translate stellar docs to Chinese
+# 恒星中文文档
+
+智能合约
+------
+
+* [恒星智能合约](./恒星智能合约.md)
