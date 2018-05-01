@@ -1,0 +1,858 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>E:\Users\lenovo\git\docs\developGuide\.恒星开发指南之发送和接受资产.md.html</title>
+
+
+<style type="text/css">
+body {
+	color: #333;
+	font: 13px/1.4 "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	background: transparent;
+	color: #4183c4;
+	text-decoration: none;
+}
+
+a:active,
+a:hover {
+	outline: 0 none;
+	text-decoration: underline;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn {
+	font-style: italic;
+}
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+mark {
+	background: #ff0;
+	color: #000;
+}
+small {
+	font-size: 80%;
+}
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+img {
+	border: 0 none;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+figure {
+	margin: 1em 40px;
+}
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace,monospace;
+	font-size: 1em;
+}
+
+pre {
+	overflow: auto;
+	font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.markdown-body {
+	padding: 30px;
+	font-size: 16px;
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+.markdown-body>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.markdown-body .absent {
+	color: #c00;
+}
+
+.markdown-body .anchor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	padding-right: 6px;
+	padding-left: 30px;
+	margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+	outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+	display: none;
+	color: #000;
+	vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+	padding-left: 8px;
+	margin-left: -30px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+	display: inline-block;
+}
+
+.markdown-body h1 tt,
+.markdown-body h1 code,
+.markdown-body h2 tt,
+.markdown-body h2 code,
+.markdown-body h3 tt,
+.markdown-body h3 code,
+.markdown-body h4 tt,
+.markdown-body h4 code,
+.markdown-body h5 tt,
+.markdown-body h5 code,
+.markdown-body h6 tt,
+.markdown-body h6 code {
+	font-size: inherit;
+}
+
+.markdown-body h1 {
+	padding-bottom: 0.3em;
+	font-size: 2.25em;
+	line-height: 1.2;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.75em;
+	line-height: 1.225;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+	font-size: 1.5em;
+	line-height: 1.43;
+}
+
+.markdown-body h4 {
+	font-size: 1.25em;
+}
+
+.markdown-body h5 {
+	font-size: 1em;
+}
+
+.markdown-body h6 {
+	font-size: 1em;
+	color: #777;
+}
+
+.markdown-body p,.markdown-body blockquote,
+.markdown-body ul,.markdown-body ol,
+.markdown-body dl,.markdown-body table,
+.markdown-body pre {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.markdown-body hr {
+	height: 4px;
+	padding: 0;
+	margin: 16px 0;
+	background-color: #e7e7e7;
+	border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+	padding-left: 2em;
+}
+
+.markdown-body ul.no-list,
+.markdown-body ol.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body li>p {
+	margin-top: 16px;
+}
+
+.markdown-body dl {
+	padding: 0;
+}
+
+.markdown-body dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.markdown-body dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+	padding: 0 15px;
+	color: #777;
+	border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+	margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body table {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	word-break: normal;
+	word-break: keep-all;
+}
+
+.markdown-body table th {
+	font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+	background-color: #f8f8f8;
+}
+
+.markdown-body img {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.markdown-body span.frame {
+	display: block;
+	overflow: hidden;
+}
+
+.markdown-body span.frame>span {
+	display: block;
+	float: left;
+	width: auto;
+	padding: 7px;
+	margin: 13px 0 0;
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.markdown-body span.frame span img {
+	display: block;
+	float: left;
+}
+
+.markdown-body span.frame span span {
+	display: block;
+	padding: 5px 0 0;
+	clear: both;
+	color: #333;
+}
+
+.markdown-body span.align-center {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-center>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.markdown-body span.align-center span img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.markdown-body span.align-right {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-right>span {
+	display: block;
+	margin: 13px 0 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body span.align-right span img {
+	margin: 0;
+	text-align: right;
+}
+
+.markdown-body span.float-left {
+	display: block;
+	float: left;
+	margin-right: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-left span {
+	margin: 13px 0 0;
+}
+
+.markdown-body span.float-right {
+	display: block;
+	float: right;
+	margin-left: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-right>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body code,.markdown-body tt {
+	padding: 0;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin: 0;
+	font-size: 85%;
+	background-color: rgba(0,0,0,0.04);
+	border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after,
+.markdown-body tt:before,
+.markdown-body tt:after {
+	letter-spacing: -0.2em;
+	content: "\00a0";
+}
+
+.markdown-body code br,
+.markdown-body tt br {
+	display: none;
+}
+
+.markdown-body del code {
+	text-decoration: inherit;
+}
+
+.markdown-body pre>code {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	word-break: normal;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+}
+
+.markdown-body .highlight {
+	margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	background-color: #f7f7f7;
+	border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+}
+
+.markdown-body pre {
+	word-wrap: normal;
+}
+
+.markdown-body pre code,
+.markdown-body pre tt {
+	display: inline;
+	max-width: initial;
+	padding: 0;
+	margin: 0;
+	overflow: initial;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after,
+.markdown-body pre tt:before,
+.markdown-body pre tt:after {
+	content: normal;
+}
+
+.highlight .pl-coc,
+.highlight .pl-entl,
+.highlight .pl-entm,
+.highlight .pl-eoa,
+.highlight .pl-mai .pl-sf,
+.highlight .pl-mm,
+.highlight .pl-pdv,
+.highlight .pl-sc,
+.highlight .pl-som,
+.highlight .pl-sr,
+.highlight .pl-v,
+.highlight .pl-vpf {
+	color: #0086b3;
+}
+.highlight .pl-eoac,
+.highlight .pl-mdht,
+.highlight .pl-mi1,
+.highlight .pl-mri,
+.highlight .pl-va,
+.highlight .pl-vpu {
+	color: #008080;
+}
+.highlight .pl-c,
+.highlight .pl-pdc {
+	color: #b4b7b4;
+	font-style: italic;
+}
+.highlight .pl-k,
+.highlight .pl-ko,
+.highlight .pl-kolp,
+.highlight .pl-mc,
+.highlight .pl-mr,
+.highlight .pl-ms,
+.highlight .pl-s,
+.highlight .pl-sok,
+.highlight .pl-st {
+	color: #6e5494;
+}
+.highlight .pl-ef,
+.highlight .pl-enf,
+.highlight .pl-enm,
+.highlight .pl-entc,
+.highlight .pl-eoi,
+.highlight .pl-sf,
+.highlight .pl-smc {
+	color: #d12089;
+}
+.highlight .pl-ens,
+.highlight .pl-eoai,
+.highlight .pl-kos,
+.highlight .pl-mh .pl-pdh,
+.highlight .pl-mp,
+.highlight .pl-pde,
+.highlight .pl-stp {
+	color: #458;
+}
+.highlight .pl-enti {
+	color: #d12089;
+	font-weight: bold;
+}
+.highlight .pl-cce,
+.highlight .pl-enc,
+.highlight .pl-kou,
+.highlight .pl-mq {
+	color: #f93;
+}
+.highlight .pl-mp1 .pl-sf {
+	color: #458;
+	font-weight: bold;
+}
+.highlight .pl-cos,
+.highlight .pl-ent,
+.highlight .pl-md,
+.highlight .pl-mdhf,
+.highlight .pl-ml,
+.highlight .pl-pdc1,
+.highlight .pl-pds,
+.highlight .pl-s1,
+.highlight .pl-scp,
+.highlight .pl-sol {
+	color: #df5000;
+}
+.highlight .pl-c1,
+.highlight .pl-cn,
+.highlight .pl-pse,
+.highlight .pl-pse .pl-s2,
+.highlight .pl-vi {
+	color: #a31515;
+}
+.highlight .pl-mb,
+.highlight .pl-pdb {
+	color: #df5000;
+	font-weight: bold;
+}
+.highlight .pl-mi,
+.highlight .pl-pdi {
+	color: #6e5494;
+	font-style: italic;
+}
+.highlight .pl-ms1 {
+	background-color: #f5f5f5;
+}
+.highlight .pl-mdh,
+.highlight .pl-mdi {
+	font-weight: bold;
+}
+.highlight .pl-mdr {
+	color: #0086b3;
+	font-weight: bold;
+}
+.highlight .pl-s2 {
+	color: #333;
+}
+.highlight .pl-ii {
+	background-color: #df5000;
+	color: #fff;
+}
+.highlight .pl-ib {
+	background-color: #f93;
+}
+.highlight .pl-id {
+	background-color: #a31515;
+	color: #fff;
+}
+.highlight .pl-iu {
+	background-color: #b4b7b4;
+}
+.highlight .pl-mo {
+	color: #969896;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+function getDocumentScrollTop() 
+{
+   var res = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0;
+   // alert(res);
+   return res;
+}
+
+function setDocumentScrollTop(ypos) 
+{
+	window.scrollTo(0, ypos);
+}
+
+</script>
+
+
+</head>
+<body class="markdown-body">
+<h1> <a id="恒星入门开发指南" class="anchor" href="#%E6%81%92%E6%98%9F%E5%85%A5%E9%97%A8%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>恒星入门开发指南</h1> 
+<p>原文链接：<a href="https://www.stellar.org/developers/guides" rel="nofollow">https://www.stellar.org/developers/guides</a><br /> 翻译：吴魏杰 校对：</p> 
+<p>一. 开始恒星之旅</p> 
+<ol> 
+ <li> <p>恒星网络概述 <br />基于恒星的网络，您可以构建移动钱包，银行工具，为自己付费的智能设备，以及任何您梦寐以求的支付方式。尽管恒星是一个复杂的分布式系统，但是使用它并不需要很复杂。<br /> <br /> 大多数应用程序通过Horizon（一种RESTful HTTP API服务器）与Stellar网络进行交互。Horizon使您能够直接提交交易，查看账户和订阅活动。 因为它只是HTTP，所以您可以使用Web浏览器，简单的命令行工具（如cURL）或Stellar SDK（用于您最喜爱的编程语言）与Horizon进行通信。 <br />安装Horizon的最简单方法是使用恒星/快速启动docker镜像。（<a href="https://hub.docker.com/r/stellar/quickstart/%EF%BC%89" rel="nofollow">https://hub.docker.com/r/stellar/quickstart/）</a></p> <p>Stellar.org维护用于与Horizon进行通信的JavaScript，Java和Go-based SDK。 还有社区维护的Ruby，Python和C＃SDK。</p> <p>在恒星网络中，每台Horizon服务器都连接到Stellar Core。 恒星核心软件通过恒星共识协议（SCP）为每项交易的状态确认并同意其他核心实例的努力工作。 恒星网络本身是由世界各地的各种个人和实体运行的相连恒星核的集合。 某些实例拥有与您进行通信的Horizon服务器，而其他实例只能用于为整个网络添加可靠性。<br /></p> <p>最简单安装Stellar Core的方法是通过恒星/快速启动docker镜像（<a href="https://hub.docker.com/r/stellar/quickstart/%EF%BC%89" rel="nofollow">https://hub.docker.com/r/stellar/quickstart/）</a><br /></p> <p>您可能希望托管您自己的Stellar Core实例，以便在不依赖第三方的情况下提交交易，对谁信任有更多控制权，或仅仅是为了帮助其他人更加可靠和强大。<br /></p> <p>恒星网络是由世界各地的不同人员和组织共同维护的恒星内核。 网络的分布式特性使其可靠和安全。<br /></p> <p>所有这些恒星核心 - 节点网络 - 最终达成一系列交易。 网络上的每笔交易都需要少量费用：100次（0.00001 XLM）。 这笔费用有助于防止不良行为者发送垃圾邮件。<br /></p> <p>为了帮助你测试你的应用或者工具，Stellar.org提供了一个小型的测试网络和Horizon实例。（<a href="https://www.stellar.org/developers/guides/concepts/test-net.html%EF%BC%89" rel="nofollow">https://www.stellar.org/developers/guides/concepts/test-net.html）</a></p> </li> 
+</ol> 
+<h3> <a id="开始创建一个账号" class="anchor" href="#%E5%BC%80%E5%A7%8B%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E8%B4%A6%E5%8F%B7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>开始创建一个账号</h3> 
+<p>您需要在Stellar网络上做任第一件事是创建一个帐户。 帐户将您的所有资金存放在Stellar网络中，并允许您发送和接收付款 - 事实上，Stellar中的几乎所有内容都以某种方式与帐户相关联。 <br /> 每个恒星账户都有公钥和秘密种子。 恒星使用公钥密码术来确保每笔交易都是安全的。 公共密钥始终可以安全共享 - 其他人需要它来识别您的帐户并验证您是否授权了交易。 但是，种子是私人信息，证明您拥有自己的账户。 你不应该与任何人分享种子。 这就像锁的组合 - 任何知道组合的人都可以打开锁。 同样，任何知道您账户种子的人都可以控制您的账户。 <br /> 如果你熟悉公钥密码学，你可能想知道种子和私钥的区别。 种子实际上是用于为您的帐户生成公钥和私钥的单个秘密数据片段。 为方便起见，恒星的工具使用种子而不是私钥：要完全访问帐户，只需提供种子，而不是公钥和私钥。 <br /> 由于种子必须保密，因此创建帐户的第一步是创建自己的种子和密钥 - 当您最终创建帐户时，您只会将公钥发送到Stellar服务器。 您可以使用以下命令生成种子和密钥：</p> 
+<pre><code>     // create a completely new and unique pair of keys
+     // see more about KeyPair objects: https://stellar.github.io/js-stellar-sdk/Keypair.html
+     var pair = StellarSdk.Keypair.random();
+	 pair.secret();
+    // SAV76USXIJOBMEQXPANUOQM6F5LIOTLPDIDVRJBFFE2MDJXG24TAPUU7
+    pair.publicKey();
+    // GCFXHS4GXL6BVUCXBWXGTITROWLVYXQKQLF4YH5O5JT3YZXCYPAFBJZB
+</code></pre> 
+<br /> 既然您拥有种子和公钥，您可以创建一个账户。 为了防止人们制造大量不必要的帐户，每个帐户必须具有1流明的最小余额（流明是恒星网络的内置货币）。 由于您还没有流明，所以您无法为帐户付款。 在现实世界中，您通常会支付一个销售流明的交易所，以创建一个新账户。然而，在Stellar的测试网络上，您可以向我们友好的机器人Friendbot询问一个非常胖的钱包，为您创建一个帐户。 
+<br /> 要创建一个测试帐户，请向Friendbot发送您创建的公钥。 它将使用该公钥作为帐户ID创建并资助一个新帐户:
+<br /> 
+<pre><code> // The SDK does not have tools for creating test accounts, so you'll have to.
+ // make your own HTTP request.
+ var request = require('request');
+ request.get({
+ url: 'https://friendbot.stellar.org',
+ qs: { addr: pair.publicKey() },
+ json: true
+ }, function(error, response, body) {
+if (error || response.statusCode !== 200) {
+console.error('ERROR!', error || body);
+}
+else {
+console.log('SUCCESS! You have a new account :)\n', body);
+}
+</code></pre> 
+<p>}); <br /> 现在是最后一步：获取帐户的详细信息并检查余额。 账户可以携带多种余额 - 每种货币的余额。<br /></p> 
+<pre><code>var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+// the JS SDK uses promises for most actions, such as retrieving an account
+server.loadAccount(pair.publicKey()).then(function(account) {
+console.log('Balances for account: ' + pair.publicKey());
+account.balances.forEach(function(balance) {
+console.log('Type:', balance.asset_type, ', Balance:', balance.balance);
+});
+});
+</code></pre> 
+<h2> <a id="发送和接受支付" class="anchor" href="#%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E6%94%AF%E4%BB%98" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>发送和接受支付</h2> 
+<p>大多数时候，你会把钱汇给有自己账户的其他人。 但是，对于本交互式指南，您应该使用您用于创建第一个帐户的相同方法进行第二个帐户的交易。</p> 
+<h2> <a id="发送支付" class="anchor" href="#%E5%8F%91%E9%80%81%E6%94%AF%E4%BB%98" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>发送支付</h2> 
+<p>行为改变恒星的事情，如发送付款，更改账户或提供交易各种货币的交易称为操作。为了实际执行某项操作，您需要创建一个交易，该交易只是一组伴随一些额外信息的操作，例如帐户正在进行交易以及加密签名以验证交易是否真实。如果交易中的任何操作失败，则全部失败。 例如，假设您有100流明，并且您进行两次60流明的付款操作。 如果您进行两次交易（每次只进行一次操作），第一次交易将成功，第二次交易将失败，因为您没有足够的流明。 你将剩下40流明。 但是，如果您将这两笔款项分组为一笔交易，则两笔款项都将失效，并且您的帐户仍会保留100流明。<br /> 最后，每笔交易都需要一小笔费用。 就像帐户的最低余额一样，这笔费用有助于阻止人们通过大量交易来超载系统。 被称为基本费用，它非常小 - 每次操作100次（这是0.00001 XLM;勺子比流明的这种微小部分更容易谈论）。 有两次操作的交易将花费200次。</p> 
+<h3> <a id="建立一个交易" class="anchor" href="#%E5%BB%BA%E7%AB%8B%E4%B8%80%E4%B8%AA%E4%BA%A4%E6%98%93" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>建立一个交易</h3> 
+<p>恒星存储并以称为XDR的二进制格式传输交易数据。 幸运的是，Stellar SDK提供了处理所有这些的工具。 以下是您可能会发送10流明到另一个帐户的方式：</p> 
+<pre><code> var StellarSdk = require('stellar-sdk');
+ StellarSdk.Network.useTestNetwork();
+ var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+ var sourceKeys = StellarSdk.Keypair
+.fromSecret('SCZANGBA5YHTNYVVV4C3U252E2B6P6F5T3U6MM63WBSBZATAQI3EBTQ4');
+var destinationId = 'GA2C5RFPE6GCKMY3US5PAB6UZLKIGSPIUKSLRB6Q723BM2OARMDUYEJ5';
+// Transaction will hold a built transaction we can resubmit if the result is unknown.
+var transaction;
+
+// First, check to make sure that the destination account exists.
+// You could skip this, but if the account does not exist, you will be charged
+// the transaction fee when the transaction fails.
+server.loadAccount(destinationId)
+// If the account is not found, surface a nicer error message for logging.
+.catch(StellarSdk.NotFoundError, function (error) {
+throw new Error('The destination account does not exist!');
+})
+// If there was no error, load up-to-date information on your account.
+.then(function() {
+   return server.loadAccount(sourceKeys.publicKey());
+})
+.then(function(sourceAccount) {
+// Start building the transaction.
+transaction = new StellarSdk.TransactionBuilder(sourceAccount)
+  .addOperation(StellarSdk.Operation.payment({
+    destination: destinationId,
+    // Because Stellar allows transaction in many currencies, you must
+    // specify the asset type. The special &quot;native&quot; asset represents Lumens.
+    asset: StellarSdk.Asset.native(),
+    amount: &quot;10&quot;
+  }))
+  // A memo allows you to add your own metadata to a transaction. It's
+  // optional and does not affect how Stellar treats the transaction.
+  .addMemo(StellarSdk.Memo.text('Test Transaction'))
+  .build();
+// Sign the transaction to prove you are actually the person sending it.
+transaction.sign(sourceKeys);
+// And finally, send it off to Stellar!
+return server.submitTransaction(transaction);
+})
+.then(function(result) {
+console.log('Success! Results:', result);
+})
+.catch(function(error) {
+console.error('Something went wrong!', error);
+// If the result is unknown (no response body, timeout etc.) we simply resubmit
+// already built transaction:
+// server.submitTransaction(transaction);
+});
+</code></pre> 
+<p>让我们一步步分解来看看发生了什么</p> 
+<ol> 
+ <li> <p>通过加载来自Stellar网络的关联帐户数据，确认您发送的帐户ID是否实际存在。 如果你跳过这一步，虽然一切都很好，但这样做会让你有机会避免做出你知道会失败的交易。 您也可以使用此通话执行您可能希望对目标帐户执行的任何其他验证。 例如，如果您正在编写银行业务软件，那么这是插入合规性检查和KYC验证的好地方。</p> <pre><code>  server.loadAccount(destinationId)
+  .then(function(account) { /* validate the account */ })
+</code></pre> </li> 
+ <li> <p>加载您从中发送的帐户的数据。 一个账户一次只能执行一个交易，并且有一个叫序列号的东西，这有助于Stellar验证交易的顺序。 交易的序列号需要与帐户的序列号匹配，所以您需要从网络获取帐户的当前序列号。</p> <pre><code> .then(function() {
+ return server.loadAccount(sourceKeys.publicKey());
+})
+</code></pre> <p>在构建交易时，SDK会自动增加帐户的序号，因此如果您想执行第二笔交易，则不需要再次检索此信息。</p> </li> 
+ <li> <p>开始建立交易。 这需要一个账户对象，而不仅仅是一个账户ID，因为它会增加账户的序列号。</p> <pre><code> var transaction = new StellarSdk.TransactionBuilder(sourceAccount)
+</code></pre> </li> 
+ <li> <p>将付款操作添加到帐户。 请注意，您需要指定您要发送的资产的类型 - 恒星的“本币”货币是流明，但您可以发送任何类型的资产或货币（从美元到比特币）到任何您信任发行人的资产 兑换（更多细节见下文）。 但现在，我们将坚持使用流明，这在SDK中被称为“本地”资产：</p> <pre><code>.addOperation(StellarSdk.Operation.payment({
+ destination: destinationId,
+ asset: StellarSdk.Asset.native(),
+ amount: &quot;10&quot;
+ }))
+</code></pre> </li> 
+</ol> 
+<p>您还应该注意，金额是一个字符串而不是数字。 当处理极小的分数或较大的值时，浮点数学可能会带来很小的不准确性。 由于并非所有系统都有原生的方式来精确表示极小或极小的小数，因此Stellar使用字符串作为可靠的方式来表示任何系统的确切数量。</p> 
+<ol start="5"> 
+ <li> <p>或者，您可以将自己的元数据（称为备忘录）添加到事务中。 恒星对这些数据不做任何处理，但您可以将其用于任何您想要的目的。 例如，如果您是代表其他人收款或付款的银行，则可能包括实际付款的人员。</p> <pre><code>.addMemo(StellarSdk.Memo.text('Test Transaction'))      
+</code></pre> </li> 
+ <li> <p>既然事务处理了它所需的全部数据，那么就必须使用秘密种子对它进行加密签名。 这证明数据实际上来自你而不是冒充你的人。</p> <pre><code>transaction.sign(sourceKeys);
+</code></pre> </li> 
+ <li> <p>最后，将它发送到恒星网络！</p> <pre><code>server.submitTransaction(transaction);
+</code></pre> </li> 
+</ol> 
+<p>一个很重要的情况你必须知道。就是由于错误，网络条件等原因，您可能无法收到Horizon服务器的响应。在这种情况下，无法确定您的交易状态。 这就是为什么您应该始终将构建的事务（或以XDR格式编码的事务）保存在变量或数据库中，并在您不知道其状态时重新提交。 如果交易已经成功应用于分类帐，Horizon将简单地返回保存的结果，而不会尝试再次提交交易。 只有在交易状态未知的情况下（因此才有可能被纳入分类帐），才会重新提交给网络。</p> 
+<h2> <a id="接受付款" class="anchor" href="#%E6%8E%A5%E5%8F%97%E4%BB%98%E6%AC%BE" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>接受付款</h2> 
+<p>实际上，您无需执行任何操作即可将款项收入恒星账户 - 如果付款人向您发送资产的成功交易，这些资产将自动添加到您的账户中</p> 
+<p>但是，您需要知道有人实际付了钱。 如果您是代表他人接受付款的银行，您需要了解发送给您的内容，以便向预期收款人支付资金。 如果您经营的是零售业务，您需要知道您的客户在向他们交付商品之前实际支付了您的费用。 如果您是带Stellar帐户的自动租赁汽车，则您可能需要确认在您的前排座位上的客户实际付款后才能开启您的引擎。</p> 
+<p>一个简单的程序，监视网络的付款和打印每一个可能看起来像：</p> 
+<pre><code>   var StellarSdk = require('stellar-sdk');
+
+   var server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+   var accountId = 'GC2BKLYOOYPDEFJKLKY6FNNRQMGFLVHJKQRGNSSRRGSMPGF32LHCQVGF';
+
+   // Create an API call to query payments involving the account.
+   var payments = server.payments().forAccount(accountId);
+
+   // If some payments have already been handled, start the results from the
+   // last seen payment. (See below in `handlePayment` where it gets saved.)
+   var lastToken = loadLastPagingToken();
+   if (lastToken) {
+      payments.cursor(lastToken);
+   }
+
+   // `stream` will send each recorded payment, one by one, then keep the
+   // connection open and continue to send you new payments as they occur.
+   payments.stream({
+       onmessage: function(payment) {
+       // Record the paging token so we can start from here next time.
+       savePagingToken(payment.paging_token);
+
+       // The payments stream includes both sent and received payments. We only
+       // want to process received payments here.
+       if (payment.to !== accountId) {
+          return;
+       }
+
+        // In Stellar’s API, Lumens are referred to as the “native” type. Other
+        // asset types have more detailed information.
+        var asset;
+        if (payment.asset_type === 'native') {
+           asset = 'lumens';
+        }
+        else {
+            asset = payment.asset_code + ':' + payment.asset_issuer;
+        }
+
+         console.log(payment.amount + ' ' + asset + ' from ' + payment.from);
+     },
+
+     onerror: function(error) {
+       console.error('Error in payment stream');
+    }
+  });
+
+    function savePagingToken(token) {
+          // In most cases, you should save this to a local database or file so that
+         // you can load it next time you stream new payments.
+    }
+
+    function loadLastPagingToken() {
+     // Get the last paging token from a local database or file
+    }
+</code></pre> 
+<p>这个程序有两个主要部分。 首先，您创建一个涉及给定账户的支付查询。 像Stellar中的大多数查询一样，这可能会返回大量的项目，因此API会返回分页令牌，稍后您可以使用该分页令牌从先前离开的同一点开始查询。 在上面的例子中，保存和加载分页标记的函数是空白的，但是在真实应用程序中，您希望将分页标记保存到文件或数据库中，以便在程序出现的情况下， 崩溃或用户关闭它。</p> 
+<pre><code>     var payments = server.payments().forAccount(accountId);
+     var lastToken = loadLastPagingToken();
+     if (lastToken) {
+       payments.cursor(lastToken);
+     }
+</code></pre> 
+<p>其次，查询的结果被流式传输。 这是观察付款或其他交易的最简单方式。 每个现有支付都是通过该流逐一发送的。 一旦所有现有付款都已发送完毕，流将保持打开状态，并在发送新付款时发送。</p> 
+<p>试一试：运行该程序，然后在另一个窗口中创建并提交付款。 你应该看到这个程序记录付款。</p> 
+<pre><code>	payments.stream({
+      onmessage: function(payment) {
+     // handle a payment
+       }
+    });
+</code></pre> 
+<p>您还可以按组或页面请求付款。 处理完每一页付款后，您需要申请下一个付款页面，直到没有任何付款。</p> 
+<pre><code>    payments.call().then(function handlePage(paymentsPage) {
+    paymentsPage.records.forEach(function(payment) {
+    // handle a payment
+     });
+      return paymentsPage.next().then(handlePage);
+   });
+</code></pre> 
+<h2> <a id="以其他货币进行交易" class="anchor" href="#%E4%BB%A5%E5%85%B6%E4%BB%96%E8%B4%A7%E5%B8%81%E8%BF%9B%E8%A1%8C%E4%BA%A4%E6%98%93" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>以其他货币进行交易</h2> 
+<p>关于恒星网络的一个惊人的事情是，您可以发送和接收许多类型的资产，例如美元，尼日利亚奈拉，比特币等数字货币，甚至是您自己的新资产。</p> 
+<p>虽然Stellar的本土资产，流明相当简单，但所有其他资产可以被认为是特定账户发行的信用。实际上，当您在恒星网络上交易美元时，您实际上不会交易美元 - 您从特定账户交易美元。这就是上述例子中的资产既有代码又有发行者的原因。发行人是创建资产的账户的ID。了解哪些帐户发布资产非常重要 - 您需要相信，如果您想在恒星网络上兑换实际美元账单上的美元，发行方将能够向您提供这些资金。正因为如此，你通常只需要信任主要金融机构代表本国货币的资产。</p> 
+<p>恒星还支持作为一种资产发送并作为另一种资源接收的付款。您可以将奈及利亚奈拉寄给德国的朋友，让他们获得欧元。这些多币种交易可以通过内置的市场机制来实现，人们可以通过该机制提供买入和卖出不同类型资产的报价。恒星将自动找到最好的人兑换货币，以便将奈拉转换成欧元。</p> 
+<p>目前恒星网络完全是由恒星基金会以外的社区运行。我们希望保证网络不会由恒星基金会操作和管理。恒星基金会贡献开源核心代码，除此之外，社区将会让这个网络更加丰富多彩，富有价值。</p>
+</body>
+</html>
